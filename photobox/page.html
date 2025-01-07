@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotobox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+        }
+        h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .image-container {
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .download-button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Willkommen in der Fotobox</h1>
+
+        <div class="image-container" id="imageContainer">
+            <!-- Hier wird das Bild dynamisch eingefügt -->
+        </div>
+
+        <a id="downloadButton" class="download-button" href="#" download>
+            Bild herunterladen
+        </a>
+    </div>
+
+    <script>
+        // Abfrageparameter aus der URL auslesen
+        const urlParams = new URLSearchParams(window.location.search);
+        const photo = urlParams.get('photo'); // "12345.jpg"
+
+        if (photo) {
+            // Bild im Container anzeigen
+            const imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = `<img src="/photobox/photos/${photo}" alt="Foto">`;
+
+            // Download-Link aktualisieren
+            const downloadButton = document.getElementById('downloadButton');
+            downloadButton.href = `/photobox/photos/${photo}`;
+        } else {
+            document.getElementById('imageContainer').innerHTML = '<p>Kein Bild gefunden.</p>';
+            document.getElementById('downloadButton').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

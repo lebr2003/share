@@ -259,6 +259,7 @@ function updateExistingFile() {
     var content = generateContent();
     var contentTitle = generateTitle();
     var contentHeader = generateHeader();
+    var pageNameInput = document.getElementById("pageName").value;
 
 
 
@@ -285,9 +286,9 @@ function updateExistingFile() {
             // Zusammenfügen der Zeilen zu aktualisiertem Inhalt
             var updatedContent = lines.join('\n');
             // Herunterladen der aktualisierten Datei
-            var blob = new Blob([updatedContent], { type: 'text/plain' });
+            var blob = new Blob([updatedContent], { type: 'text/html' });
             var anchor = document.createElement('a');
-            anchor.download = 'html.txt'; // Dateiname für die heruntergeladene Datei
+            anchor.download = pageNameInput + '.html'; // Dateiname für die heruntergeladene Datei
             anchor.href = window.URL.createObjectURL(blob);
             anchor.click();
         })
